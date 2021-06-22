@@ -1,0 +1,9 @@
+<%= form_for @post, html: { multipart: true } do |f| %>
+
+  <div class="form-group">
+    <%= f.hidden_field :image, value: :image_data %>
+    <%= f.file_field :image %>
+  </div>
+  <%= f.submit "Save", class: "btn btn-primary"%>
+
+<% end %>

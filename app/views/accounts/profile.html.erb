@@ -1,0 +1,37 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag @account.image_url, width: "250px", height: "250px", class: "imx-auto d-block rounded-circle" %>
+    </div>
+    <div class="col-8 text-start" style="margin: auto">
+      <div class="row row-cols-auto">
+        <div class="col"><h1><%= @account.username %></h1></div>
+        <div class="col mx-auto"><%= link_to "Edit Profile", edit_account_registration_path, class: "btn btn-muted" %></div>
+      </div>
+      <div class="row row-cols-auto">
+          <div class="col"><%= @account.posts.count %> posts</div>
+          <div class="col"><%= @account.total_followers %> followers</div>
+          <div class="col"><%= @account.total_following %> following</div>
+      </div>
+      <p><%= @account.full_name %></p>
+      <%= simple_format @account.description %>
+
+      <p><%= link_to @account.website if @account.website.present? %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="row row-cols-3">
+        <% @posts.each do |post| %>
+          <div class="col">
+<!--              <div class="card">-->
+              <%= image_tag post.image_url, class: "img img-fluid", height: "300px", style: "margin: 14px"  %>
+<!--              </div>-->
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

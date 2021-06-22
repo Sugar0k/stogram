@@ -6,6 +6,9 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 
+
+# image uploading
+gem 'shrine', '~> 3.0'
 # gem 'pg', '~> 0.18.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -45,6 +48,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Local ENW vars
+  gem 'figaro'
 end
 
 group :test do

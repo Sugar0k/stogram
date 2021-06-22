@@ -1,0 +1,24 @@
+<li class="nav-item">
+  <% if current_page?(dashboard_path) %>
+    <%= link_to "Home", dashboard_path, class: "nav-link active" %>
+  <% else %>
+    <%= link_to "Home", dashboard_path, class: "nav-link" %>
+  <% end %>
+</li>
+<li class="nav-item">
+  <% if current_page?(new_posts_path) %>
+    <%= link_to "New Post", new_posts_path, class: "nav-link active" %>
+  <% else %>
+    <%= link_to "New Post", new_posts_path, class: "nav-link" %>
+  <% end %>
+</li>
+<li class="nav-item">
+  <% if current_page?(profile_path(current_account.username)) %>
+    <%= link_to "Profile", profile_path(current_account.username), class: "nav-link active" %>
+  <% else %>
+    <%= link_to "Profile", profile_path(current_account.username), class: "nav-link" %>
+  <% end %>
+</li>
+<li class="nav-item">
+  <%= link_to "Sign out", destroy_account_session_path, class: "nav-link" %>
+</li>
