@@ -7,6 +7,7 @@ class Account < ApplicationRecord
   include ImageUploader::Attachment(:image)
 
   has_many :posts
+  has_many :likes
 
   def full_name
     "#{first_name} #{last_name}"

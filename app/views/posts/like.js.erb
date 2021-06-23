@@ -1,0 +1,10 @@
+<% if @success == true %>
+$(".like-<%= @post_id %>").removeClass("far");
+$(".like-<%= @post_id %>").addClass("active");
+$(".like-<%= @post_id %>").addClass("fa");
+<% else %>
+$(".like-<%= @post_id %>").removeClass("active");
+$(".like-<%= @post_id %>").removeClass("fa");
+$(".like-<%= @post_id %>").addClass("far");
+<% end %>
+$("#post-<%= @post_id %>-likes").text("<%= @post_likes %> likes");

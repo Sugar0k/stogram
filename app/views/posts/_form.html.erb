@@ -1,9 +1,17 @@
 <%= form_for @post, html: { multipart: true } do |f| %>
+  <div class="text-start">
 
-  <div class="form-group">
-    <%= f.hidden_field :image, value: :image_data %>
-    <%= f.file_field :image %>
+    <div class="form-group">
+      <%= f.label :image %><br />
+      <%= f.hidden_field :image %>
+      <%= f.file_field :image, class: "form-control"%>
+    </div><br />
+
+    <div class="form-group">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, class: "form-control"%>
+    </div><br />
+
+    <%= f.submit "Save", class: "btn btn-success"%>
   </div>
-  <%= f.submit "Save", class: "btn btn-primary"%>
-
 <% end %>

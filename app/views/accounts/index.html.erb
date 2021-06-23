@@ -1,19 +1,13 @@
 <div class="container">
+  <br>
   <div class="row">
     <div class="col-8">
-      <br>
       <% @posts.each do |post| %>
         <div class="card">
 
           <div class="card-header">
             <div class="row">
-              <div class="col-sm-auto">
-                <%= image_tag post.account.image_url,
-                              class: "imx-auto d-block rounded-circle", height: "50px", width: "50px"  %>
-              </div>
-              <div class="col-sm-auto" style="margin: auto">
-                <h5 class="text-start"><%= post.account.username%></h5>
-              </div>
+              <%= render "username", account: post.account %>
               <div class="col" style="margin: auto">
                 <h5 class="text-muted text-end">created at <%= post.created_at %></h5>
               </div>
@@ -22,13 +16,55 @@
 
           <%= image_tag post.image_url, class: "img" %>
 
-          <div class="card-footer bg-transparent">
-            <h5 class="card-title"><%= post.account.username%></h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated <%= post.updated_at %></small></p>
+          <div class="card-footer bg-transparent text-start">
+            <div class="post-action">
+              <i class="fa-heart like-<%= post.id %> <%= post_liked_by_user?(post.id)? 'active fa': 'far'%> fa-2x post-like" data-id="<%= post.id %>"></i>
+              <i class="far fa-comment fa-2x post-comment"></i>
+            </div>
+
+            <p><strong id="post-<%= post.id %>-likes"><%= post.total_likes_count %> likes</strong></p>
+            <p><strong id="post-<%= post.id %>-likes"><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
+
+            <div class="row row-cols-auto">
+              <p><strong><%= link_to post.account.username, profile_path(post.account.username), class: "text text-dark text-decoration-none" %></strong></p>
+              <%= simple_format post.description %>
+            </div>
+            <p class="card-text"><small class="text-muted"><%= time_ago_in_words post.updated_at %></small></p>
+
           </div>
         </div><br>
       <% end %>
+    </div>
+
+    <div class="col-4">
+      <div class="account-summary"  >
+        <div class="row">
+          <%= render "username", account: current_account %>
+        </div><br />
+        <div class="row">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div><br />
+        <div class="row">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
