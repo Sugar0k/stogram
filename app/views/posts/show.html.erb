@@ -1,0 +1,45 @@
+<div class="container t">
+  <br>
+  <div class="row justify-content-md-center" >
+    <div class="col picture">
+      <%= image_tag @post.image_url, class: "" %>
+    </div>
+    <div class="col px-0 border" style="min-width: 300px">
+      <div class="py-2  ms-2">
+        <div class="row fs-4 pe-2">
+          <%= render "accounts/username", account: @post.account, size: 50 %>
+          <div class="col" style="margin: auto">
+            <h5 class="text-muted text-end m-auto me-0"><%= @post.created_at %></h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-transparent text-start">
+
+        <div class="row row-cols-auto">
+          <p><strong><%= link_to @post.account.username, profile_path(@post.account.username), class: "text text-dark text-decoration-none" %></strong></p>
+          <%= simple_format @post.description %>
+        </div>
+        <%= render "posts/comments", post: @post %>
+
+        <div class="m-auto align-items-center text-center row post-action">
+          <i class="fa-heart like-<%= @post.id %> <%= post_liked_by_user?(@post.id)? 'active fa': 'far'%> fa-2x post-like" data-id="<%= @post.id %>"></i>
+          <strong class="text-center m-auto" id="post-<%= @post.id %>-likes"><%= @post.total_likes_count %> likes</strong>
+          <small class="text-muted"><%= time_ago_in_words @post.updated_at %></small>
+        </div>
+
+
+
+        <%= form_for @comment do |f| %>
+          <div class="row">
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_field :comment, class: "form-control col mx-1" %>
+            <%= f.submit "Send", class: "btn btn-outline-secondary float-right col-2  mx-1"%>
+          </div>
+        <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

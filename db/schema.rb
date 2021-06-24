@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_151917) do
+ActiveRecord::Schema.define(version: 2021_06_24_161126) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,6 +33,25 @@ ActiveRecord::Schema.define(version: 2021_06_23_151917) do
     t.string "website"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "account_id"
+    t.integer "post_id"
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_comments_on_account_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
+  create_table "followers", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "following_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follower_id"], name: "index_followers_on_follower_id"
+    t.index ["following_id"], name: "index_followers_on_following_id"
   end
 
   create_table "likes", force: :cascade do |t|

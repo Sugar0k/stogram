@@ -1,0 +1,8 @@
+<% post.comments.each do |comment| %>
+  <div class="row">
+  <%= render "accounts/username", account: comment.account, size: 30 %>
+<!--  <strong><%#= comment.account.username %></strong>-->
+  </div>
+    <p><%= comment.comment %></p>
+
+<% end %>

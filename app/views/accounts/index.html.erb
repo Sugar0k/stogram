@@ -6,8 +6,8 @@
         <div class="card">
 
           <div class="card-header">
-            <div class="row">
-              <%= render "username", account: post.account %>
+            <div class="row fs-4">
+              <%= render "username", account: post.account, size: 50 %>
               <div class="col" style="margin: auto">
                 <h5 class="text-muted text-end">created at <%= post.created_at %></h5>
               </div>
@@ -19,41 +19,52 @@
           <div class="card-footer bg-transparent text-start">
             <div class="post-action">
               <i class="fa-heart like-<%= post.id %> <%= post_liked_by_user?(post.id)? 'active fa': 'far'%> fa-2x post-like" data-id="<%= post.id %>"></i>
-              <i class="far fa-comment fa-2x post-comment"></i>
+              <%= link_to post_path(post.id) do %>
+                <i class="far fa-comment fa-2x post-comment"></i>
+              <% end %>
             </div>
 
             <p><strong id="post-<%= post.id %>-likes"><%= post.total_likes_count %> likes</strong></p>
-            <p><strong id="post-<%= post.id %>-likes"><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
 
             <div class="row row-cols-auto">
               <p><strong><%= link_to post.account.username, profile_path(post.account.username), class: "text text-dark text-decoration-none" %></strong></p>
               <%= simple_format post.description %>
             </div>
-            <p class="card-text"><small class="text-muted"><%= time_ago_in_words post.updated_at %></small></p>
 
+            <%= render "posts/comments", post: post %>
+
+            <p class="card-text"><small class="text-muted"><%= time_ago_in_words post.updated_at %></small></p>
+            <%= form_for @comment do |f| %>
+              <div class="row">
+                <%= f.hidden_field :post_id, value: post.id %>
+                <%= f.text_field :comment, class: "form-control col mx-1", id:"comment-post-#{post.id}" %>
+                <%= f.submit "Send", class: "btn btn-outline-secondary float-right col-2  mx-1"%>
+              </div>
+            <% end %>
           </div>
+
         </div><br>
       <% end %>
     </div>
 
     <div class="col-4">
       <div class="account-summary"  >
-        <div class="row">
-          <%= render "username", account: current_account %>
+        <div class="row fs-4">
+          <%= render "username", account: current_account, size: 50 %>
         </div><br />
         <div class="row">
-          <div class="card" style="width: 18rem;">
+          <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
+              <div class="row row-cols-2">
+                <p class="text-muted">Suggestion for you</p>
+                <%= link_to "View All", "#", class: "float-right text-dark text-end" %>
+              </div>
+              <%= render "accounts/follower_suggestion" %>
             </div>
           </div>
         </div><br />
         <div class="row">
-          <div class="card" style="width: 18rem;">
+          <div class="card">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>

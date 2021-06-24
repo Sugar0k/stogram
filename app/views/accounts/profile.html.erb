@@ -7,7 +7,7 @@
     <div class="col-8 text-start" style="margin: auto">
       <div class="row row-cols-auto">
         <div class="col"><h1><%= @account.username %></h1></div>
-        <div class="col mx-auto"><%= link_to "Edit Profile", edit_account_registration_path, class: "btn btn-muted" %></div>
+        <div class="col mx-auto"><%= link_to "Edit Profile", edit_account_registration_path, class: "btn btn-muted" if can_edit_profile? @account.id %></div>
       </div>
       <div class="row row-cols-auto">
           <div class="col"><%= @account.posts.count %> posts</div>

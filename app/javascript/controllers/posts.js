@@ -1,4 +1,3 @@
-
 $(function () {
     $(".post-like").on("click", function () {
         let post_id = $(this).data("id");

@@ -6,6 +6,8 @@ class Account < ApplicationRecord
 
   include ImageUploader::Attachment(:image)
 
+  validates_uniqueness_of :username, :email
+
   has_many :posts
   has_many :likes
 
@@ -14,10 +16,10 @@ class Account < ApplicationRecord
   end
 
   def total_followers
-    0
+    Follower.where(following_id: self.id).count
   end
 
   def total_following
-    1
+    Follower.where(follower_id: self.id).count
   end
 end

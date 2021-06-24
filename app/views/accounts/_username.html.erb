@@ -1,6 +1,6 @@
-<div class="col-sm-auto">
-  <%= link_to image_tag(account.image_url, class: "imx-auto d-block rounded-circle", height: "50px", width: "50px"), profile_path(account.username) if  account.image.present?%>
+<div class="col-sm-auto my-auto pe-0">
+  <%= link_to profile_picture(account, size), profile_path(account.username) %>
 </div>
-<div class="col-sm-auto" style="margin-top: auto; margin-bottom: auto">
-  <%= link_to account.username, profile_path(account.username), class: "text-start text-dark text-decoration-none fs-4" %>
+<div class="col-sm-auto ps-1" style="margin-top: auto; margin-bottom: auto">
+  <%= link_to account.username, profile_path(account.username), class: "text-start text-dark text-decoration-none" %>
 </div>

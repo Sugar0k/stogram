@@ -1,0 +1,13 @@
+<% @follower_suggestion.each do |user| %>
+  <div class="recommended-follower">
+    <div class="row fs-5">
+      <%= render "username", account: user, size: 30 %>
+      <div class="col text-end" style="margin: auto">
+        <%=form_tag follow_account_path, method: :post do %>
+          <%= hidden_field_tag :follow_id, user.id %>
+          <%= submit_tag "Follow", class: "btn btn-outline-dark" %>
+        <% end %>
+      </div>
+    </div>
+  </div><br>
+<% end %>
