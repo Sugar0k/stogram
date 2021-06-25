@@ -10,9 +10,23 @@ class Account < ApplicationRecord
 
   has_many :posts
   has_many :likes
+  # belongs_to :follower, foreign_key: :follower_id, class_name: "Account"
+  # belongs_to :following, foreign_key: :following_id, class_name: "Account"
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def all_followings
+    # arr = Array.new
+    # Follower.where(following_id: self.id).each do |f|
+    #   arr.join f.follower
+    # end
+    # arr
+  end
+
+  def all_followers
+    Follower.where(follower_id: self.id)
   end
 
   def total_followers
@@ -22,4 +36,5 @@ class Account < ApplicationRecord
   def total_following
     Follower.where(follower_id: self.id).count
   end
+
 end

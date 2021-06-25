@@ -6,11 +6,6 @@ class AccountsController < ApplicationController
     # user feed
     @posts = Post.active.limit 50
     @comment = Comment.new
-
-    following_ids = Follower.where(follower_id: current_account.id).map(&:following_id)
-    following_ids << current_account.id
-
-    @follower_suggestion = Account.where.not(id: following_ids)
   end
 
   def follow_account

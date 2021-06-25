@@ -7,4 +7,11 @@ module AccountsHelper
   def can_edit_profile? profile_id
     account_signed_in? && current_account.id == profile_id
   end
+
+  def follower_suggestion
+    following_ids = Follower.where(follower_id: current_account.id).map(&:following_id)
+    following_ids << current_account.id
+
+    Account.where.not(id: following_ids)
+  end
 end
