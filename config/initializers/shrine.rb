@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'shrine'
 require 'shrine/storage/file_system'
 
 Shrine.storages = {
-  cache: Shrine::Storage::FileSystem.new("public", prefix: "upload/cache"),
-  store: Shrine::Storage::FileSystem.new("public", prefix: "upload")
+  cache: Shrine::Storage::FileSystem.new('public', prefix: 'upload/cache'),
+  store: Shrine::Storage::FileSystem.new('public', prefix: 'upload')
 }
 
 Shrine.plugin :activerecord

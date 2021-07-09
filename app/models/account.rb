@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Account < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -18,6 +20,7 @@ class Account < ApplicationRecord
   end
 
   def all_followings
+    # Follower.include(:account).where(self.id == )
     # arr = Array.new
     # Follower.where(following_id: self.id).each do |f|
     #   arr.join f.follower
@@ -26,15 +29,14 @@ class Account < ApplicationRecord
   end
 
   def all_followers
-    Follower.where(follower_id: self.id)
+    Follower.where(follower_id: id)
   end
 
   def total_followers
-    Follower.where(following_id: self.id).count
+    Follower.where(following_id: id).count
   end
 
   def total_following
-    Follower.where(follower_id: self.id).count
+    Follower.where(follower_id: id).count
   end
-
 end

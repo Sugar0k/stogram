@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_06_24_161126) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accounts", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_161126) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "account_id"
-    t.integer "post_id"
+    t.bigint "account_id"
+    t.bigint "post_id"
     t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -46,8 +49,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_161126) do
   end
 
   create_table "followers", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
+    t.bigint "follower_id"
+    t.bigint "following_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["follower_id"], name: "index_followers_on_follower_id"
@@ -55,8 +58,8 @@ ActiveRecord::Schema.define(version: 2021_06_24_161126) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "account_id"
-    t.integer "post_id"
+    t.bigint "account_id"
+    t.bigint "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_likes_on_account_id"
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_161126) do
 
   create_table "posts", force: :cascade do |t|
     t.boolean "active"
-    t.integer "account_id"
+    t.bigint "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "image_data"

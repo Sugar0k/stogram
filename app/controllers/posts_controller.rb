@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_account!
   before_action :set_post, only: [:show]
@@ -11,9 +13,9 @@ class PostsController < ApplicationController
     @post.account_id = current_account.id if account_signed_in?
 
     if @post.save
-      redirect_to dashboard_path, flash: { success: "Post was created successfully!" }
+      redirect_to dashboard_path, flash: { success: 'Post was created successfully!' }
     else
-      redirect_to new_posts_path, flash: { success: "Post was not saved!" }
+      redirect_to new_posts_path, flash: { success: 'Post was not saved!' }
     end
   end
 

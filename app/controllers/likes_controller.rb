@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :authenticate_account!
 
@@ -7,7 +9,7 @@ class LikesController < ApplicationController
     existing_like = Like.where(post_id: params[:post_id], account_id: current_account.id)
 
     respond_to do |format|
-      format.js {
+      format.js do
         if existing_like.any?
           existing_like.first.destroy
           @success = false
@@ -18,9 +20,8 @@ class LikesController < ApplicationController
         end
 
         @post_likes = Post.find(@post_id).total_likes_count
-        render "posts/like"
-      }
+        render 'posts/like'
+      end
     end
   end
-
 end

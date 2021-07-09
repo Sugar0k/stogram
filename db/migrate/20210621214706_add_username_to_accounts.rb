@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUsernameToAccounts < ActiveRecord::Migration[6.1]
   def change
     add_column :accounts, :first_name, :string, limit: 25
