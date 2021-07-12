@@ -48,7 +48,7 @@
           <div class="row fs-4">
             <%= render "username", account: account, size: 25 %>
             <div class="col text-end">
-              <%= link_to "Unfollow", unfollow_account_path(account), method: :delete, class: "btn btn-outline-secondary" %>
+              <%= link_to "Unfollow", unfollow_account_path(account), method: :delete, class: "btn btn-outline-secondary" if @account.id == current_account.id %>
             </div>
           </div>
         <% end %>

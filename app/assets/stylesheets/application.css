@@ -14,8 +14,8 @@
  *= require_self
  */
 
-@import "~bootstrap/scss/bootstrap.scss";
-/*@import "bootstrap";*/
+/*@import "~bootstrap/scss/bootstrap.scss";*/
+@import "bootstrap";
 
 .picture {
     position: relative;
