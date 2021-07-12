@@ -21,13 +21,13 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mt-2">
     <div class="col-12">
       <div class="row row-cols-3">
         <% @posts.each do |post| %>
           <%= link_to post_path(post.id) do %>
-            <div class="col picture">
-              <%= image_tag post.image_url, class: "img img-fluid", height: "300px", style: "margin: 14px"  %>
+            <div class="col picture m-2" style="width: 400px; height: 400px">
+              <%= image_tag post.image_url %>
           </div>
           <% end %>
       <% end %>
