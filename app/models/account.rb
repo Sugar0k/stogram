@@ -20,16 +20,15 @@ class Account < ApplicationRecord
   end
 
   def all_followings
-    # Follower.include(:account).where(self.id == )
-    # arr = Array.new
-    # Follower.where(following_id: self.id).each do |f|
-    #   arr.join f.follower
-    # end
-    # arr
+    following_ids = Follower.where(follower_id: self.id).map(&:following_id)
+
+    Account.where(id: following_ids)
   end
 
   def all_followers
-    Follower.where(follower_id: id)
+    followers_ids = Follower.where(following_id: self.id).map(&:follower_id)
+
+    Account.where(id: followers_ids)
   end
 
   def total_followers

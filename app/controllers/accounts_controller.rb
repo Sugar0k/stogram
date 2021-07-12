@@ -6,6 +6,9 @@ class AccountsController < ApplicationController
 
   def index
     # user feed
+    # followers_ids = Follower.where(follower_id: current_account.id).map(&:follower_id)
+    # followers_ids << current_account.id
+
     @posts = Post.active.limit 50
     @comment = Comment.new
   end
@@ -19,6 +22,16 @@ class AccountsController < ApplicationController
     end
   end
 
+  def unfollow_account
+    account_id = params[:account_id]
+    follow = Follower.where(following_id: account_id, follower_id: current_account.id)
+    if follow.destroy_all
+      flash[:success] = 'New following'
+    else
+      flash[:danger] = 'Fail'
+    end
+  end
+
   def profile
     @posts = @account.posts.active
   end
@@ -26,6 +39,8 @@ class AccountsController < ApplicationController
   def set_account
     @account = Account.find_by_username(params[:username])
   end
+
+
 
   private
 

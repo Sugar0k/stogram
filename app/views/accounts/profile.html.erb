@@ -11,10 +11,8 @@
       </div>
       <div class="row row-cols-auto">
           <div class="col"><%= @account.posts.count %> posts</div>
-          <div class="col">
-            <%= @account.total_followers %> followers
-          </div>
-          <div class="col" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><%= @account.total_following %> following</div>
+          <div class="col" type="button" data-bs-toggle="modal" data-bs-target="#followers"><%= @account.total_followers %> followers</div>
+          <div class="col" type="button" data-bs-toggle="modal" data-bs-target="#following"><%= @account.total_following %> following</div>
       </div>
       <p><%= @account.full_name %></p>
       <%= simple_format @account.description %>
@@ -38,7 +36,31 @@
   </div>
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="following" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Followings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% @account.all_followings.each do |account|  %>
+          <div class="row fs-4">
+            <%= render "username", account: account, size: 25 %>
+            <div class="col text-end">
+              <%= link_to "Unfollow", unfollow_account_path(account), method: :delete, class: "btn btn-outline-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="followers" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -46,8 +68,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= @account.all_followers  %>
-        <%#= render "followers", followers: @account.all_followers %>
+        <% @account.all_followers.each do |account|  %>
+          <div class="row fs-4">
+            <%= render "username", account: account, size: 25 %>
+          </div>
+        <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

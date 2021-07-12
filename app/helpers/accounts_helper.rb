@@ -15,4 +15,6 @@ module AccountsHelper
 
     Account.where.not(id: following_ids)
   end
+
+
 end
